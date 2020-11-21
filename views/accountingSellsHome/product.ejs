@@ -1,0 +1,42 @@
+
+<%- include('../partials/navbar.ejs')%>
+<%- include('../partials/salesAccounting.ejs')%>
+
+<div class="main-container">
+        <a href="/product/create">Insert New Product</a>
+        <hr>
+		<h2 align=center>Product Information</h2>
+		<br>
+		<table class="table table-striped">
+			<tr>
+				<th>#</td>
+				<th>Product Code</td>
+				<th>Product Number</td>
+				<th>Product Vendor</td>
+                <th>Quantity In Stock</td>
+                <th>Buy Price</td>
+                <th>Sell Price</td>
+                <th>Product Description</td>
+                <!-- <th>Product Image</td> -->
+                <th>Action</td>
+			</tr>
+	
+			<% for(var i=0; i< productList.length; i++ ){ %>
+			<tr>
+				<td><%= productList[i].id %></td>
+				<td><%= productList[i].productCode %></td>
+				<td><%= productList[i].productName %></td>
+                <td><%= productList[i].productVendor %></td>
+                <td><%= productList[i].quantityInStock %></td>
+				<td><%= productList[i].buyPrice %></td>
+				<td><%= productList[i].sellPrice %></td>
+                <td><%= productList[i].productDescription %></td>
+                <!-- <td><%= productList[i].productImage %></td> -->
+				<td>
+                    <a href="../product/edit/<%=productList[i].id%>">Edit</a><br>
+                    <a href="../product/delete/<%=productList[i].id%>">Delete</a>
+				</td>
+			</tr>
+			<% } %>
+		</table>					
+</div>

@@ -1,0 +1,27 @@
+
+<%- include('../partials/navbar.ejs')%>
+<%- include('../partials/salesAccounting.ejs')%>
+
+<div class="main-container">
+    <h2 align=center>Salary Information</h2>
+    <br>
+    <table class="table table-striped">
+        <tr>
+            <th>#</td>
+            <th>Employee ID</td>
+            <th>Salary Grade</td>
+            <th>Min Salary</td>
+            <th>Max Salary</td>
+        </tr>
+
+        <% for(var i=0; i< salaryList.length; i++ ){ %>
+        <tr>
+            <td><%= salaryList[i].id %></td>
+            <td><%= salaryList[i].employeeId %></td>
+            <td><%= salaryList[i].salaryGrade %></td>
+            <td><%= salaryList[i].salaryMin %></td>
+            <td><%= salaryList[i].salaryMax %></td>
+        </tr>
+        <% } %>
+    </table>					
+</div>

@@ -1,0 +1,32 @@
+
+<%- include('../partials/navbar.ejs')%>
+<%- include('../partials/salesAccounting.ejs')%>
+
+<div class="main-container">
+		<a href="/customer/create">Create New Customer</a>
+        <hr>
+		<h2 align=center>Customer Information</h2>
+		<br>
+		<table class="table table-striped">
+			<tr>
+				<th>#</td>
+				<th>Customer Name</td>
+				<th>Customer Contact Number</td>
+				<th>Customer Address</td>
+				<th>Action</td>
+			</tr>
+	
+			<% for(var i=0; i< customerList.length; i++ ){ %>
+			<tr>
+				<td><%= customerList[i].id %></td>
+				<td><%= customerList[i].customerName %></td>
+				<td><%= customerList[i].customerContactNumber %></td>
+				<td><%= customerList[i].customerAddress %></td>
+				<td>
+					<a href="../customer/edit/<%=customerList[i].id%>">Edit</a>	|
+					<a href="../customer/delete/<%=customerList[i].id%>">delete</a>
+				</td>
+			</tr>
+			<% } %>
+		</table>					
+</div>

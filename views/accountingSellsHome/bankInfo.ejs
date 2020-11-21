@@ -1,0 +1,29 @@
+
+<%- include('../partials/navbar.ejs')%>
+<%- include('../partials/salesAccounting.ejs')%>
+
+<div class="main-container">
+    <h2 align=center>Bank Information</h2>
+    <br>
+    <table class="table table-striped">
+        <tr>
+            <th>#</td>
+            <th>Account Name</td>
+            <th>Account Number</td>
+            <th>Bank Name</td>
+            <th>Action</th>
+        </tr>
+
+        <% for(var i=0; i< bankInfo.length; i++ ){ %>
+        <tr>
+            <td><%= bankInfo[i].id %></td>
+            <td><%= bankInfo[i].accountName %></td>
+            <td><%= bankInfo[i].accountNumber %></td>
+            <td><%= bankInfo[i].bankName %></td>
+            <td>
+                <a href="../bankInfo/edit/<%=bankInfo[i].id%>">Edit</a>
+            </td>
+        </tr>
+        <% } %>
+    </table>					
+</div>
