@@ -37,5 +37,15 @@ module.exports ={
 		db.execute(sql,function(status){
 			callback(status);
 		});
+	},
+	search: function(customer, callback){
+		var sql = "SELECT * FROM customer WHERE "+customer.searchBy+" LIKE '%"+customer.search+"%'";
+		db.getResults(sql, function(results){
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback(false);
+			}
+		});
 	}
 }

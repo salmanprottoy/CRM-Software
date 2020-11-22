@@ -100,5 +100,19 @@ router.post('/delete/:id', (req, res)=>{
 	
 })
 
+router.post('/search',(req,res)=>{
+	var product = {
+		search : req.body.search,
+		searchBy: req.body.searchBy
+	};
+	productModel.search(product, function(results){
+		if(results){
+			res.json({product: results});
+		}else{
+			res.json({product:'error'});
+		}
+	});
+});
+
 
 module.exports = router;

@@ -24,5 +24,15 @@ module.exports ={
 			callback(status)
 		});
 
+	},
+	search: function(salary, callback){
+		var sql = "SELECT * FROM salary WHERE "+salary.searchBy+" LIKE '%"+salary.search+"%'";
+		db.getResults(sql, function(results){
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback(false);
+			}
+		});
 	}
 }

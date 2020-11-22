@@ -1,0 +1,99 @@
+<%- include('../partials/preloader.ejs')%>
+<%- include('../partials/navbar.ejs')%>
+<%- include('../partials/sidebar_right.ejs')%>
+<%- include('../partials/admin_sidebar')%>
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Subscriber List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Subscriber List</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <!-- <div class="card-box mb-30" style="float: right; padding-right: 20px; padding-top: 20px;">
+                <a href="/user/create">
+                    <button type="button" class="btn btn-primary">Primary</button>
+                </a>
+             </div> -->
+
+
+
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Super Admin List</h4>
+                            
+                        </div>
+                        <div class="pull-right">
+                            <a href="/user/create">
+                                <button type="button" class="btn btn-primary"><i class="fa fa-user-plus"></i></button>
+                            </a>
+                         </div>
+                    </div>
+
+                </div>
+                
+                <div class="pb-20">
+
+                    <table class="table hover data-table  nowrap ">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">Name</th>
+                                <th>Age</th>
+                                <th>Office</th>
+                                <th>Address</th>
+                                <th>Start Date</th>
+                                <th class="datatable-nosort">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                            <tr>
+                                <td class="table-plus">Gloria F. Mead</td>
+                                <td>25</td>
+                                <td>Sagittarius</td>
+                                <td>2829 Trainer Avenue Peoria, IL 61602 </td>
+                                <td>29-03-2018</td>
+                                <td>
+
+                                
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                               
+                                            </div>
+                                        </div>
+                                    
+                                </td>
+                            </tr>
+
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

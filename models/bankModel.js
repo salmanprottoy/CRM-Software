@@ -22,6 +22,15 @@ module.exports ={
 		db.execute(sql, function(status){
 			callback(status)
 		});
-
+	},
+	search: function(bankInfo, callback){
+		var sql = "SELECT * FROM bankinfo WHERE "+bankInfo.searchBy+" LIKE '%"+bankInfo.search+"%'";
+		db.getResults(sql, function(results){
+			if(results.length > 0){
+				callback(results);
+			}else{
+				callback(false);
+			}
+		});
 	}
 }

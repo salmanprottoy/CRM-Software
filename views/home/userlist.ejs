@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User List Page</title>
+</head>
+<body>
+	<h3>Userlist</h3>
+
+	<a href="/home">Back</a> |
+	<a href="/logout">logout</a>
+	<br>
+
+	<table border="1">
+		<tr>
+			<td>ID</td>
+			<td>USERNAME</td>
+			<td>PASSWORD</td>
+			<td>TYPE</td>
+			<td>Action</td>
+		</tr>
+
+		<% for(var i=0; i< userlist.length; i++ ){ %>
+		<tr>
+			<td><%= userlist[i].id %></td>
+			<td><%= userlist[i].username %></td>
+			<td><%= userlist[i].password %></td>
+			<td><%= userlist[i].type %></td>
+			<td>
+				<a href="/user/edit/<%=userlist[i].id%>">Edit</a> | 
+				<a href="/user/delete/<%=userlist[i].id%>">Delete</a>  
+			</td>
+		</tr>
+		<% } %>
+	</table>
+</body>
+</html>

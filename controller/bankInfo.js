@@ -36,4 +36,18 @@ router.post('/edit/:id', (req, res)=>{
 	});
 })
 
+router.post('/search',(req,res)=>{
+	var bankInfo = {
+		search : req.body.search,
+		searchBy: req.body.searchBy
+	};
+	bankModel.search(bankInfo, function(results){
+		if(results){
+			res.json({bankInfo: results});
+		}else{
+			res.json({bankInfo:'error'});
+		}
+	});
+});
+
 module.exports = router;

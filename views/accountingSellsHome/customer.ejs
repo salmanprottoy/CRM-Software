@@ -3,11 +3,61 @@
 <%- include('../partials/salesAccounting.ejs')%>
 
 <div class="main-container">
-		<a href="/customer/create">Create New Customer</a>
-        <hr>
-		<h2 align=center>Customer Information</h2>
-		<br>
-		<table class="table table-striped">
+	<a href="/customer/create">Create New Customer</a>
+    <hr>
+	<h2 align=center>Customer Information</h2>
+	<br>
+	<div>
+		<select class="form-control mr-sm-2" id="searchBy">
+			<option selected hidden>Search By</option>
+			<option value="customerName">Customer Name</option>
+			<option value="customerContactNumber">Customer Contact Number</option>
+			<option value="customerAddress">Customer Address</option>
+		</select>
+        <input class="form-control mr-sm-2" type="text" name="search" id="search" placeholder="Search Customer" aria-label="Search Customer">
+	</div>
+	<script type="text/javascript">
+		
+		$(document).ready(function(){
+		$('#search').on('keyup',function(){
+			var search = $("#search").val();
+			var searchBy = $("#searchBy").val();
+
+			$.ajax({
+				url: '/customer/search',
+				method: 'post',
+				datatype : 'json',
+				data : {'search':search,
+						'searchBy':searchBy},
+				success:function(response){
+					if(response.customer !== 'error'){
+						var tableBody="<tr><td>#</td><td>Customer Name</td><td>Customer Contact Number</td><td>Customer Address</td><td>Action</td></tr>";
+						response.customer.forEach(element => {
+							var tableRow="";
+							tableRow+="<td>"+element.id+"</td>";
+							tableRow+="<td>"+element.customerName+"</td>";
+							tableRow+="<td>"+element.customerContactNumber+"</td>";
+							tableRow+="<td>"+element.customerAddress+"</td>";
+							tableRow+="<td><a href='../customer/edit/"+element.id+"'>Edit</a> | <a href='../customer/delete/"+element.id+"'>Delete</a></td>";
+							tableBody=tableBody+"<tr>"+tableRow+"</tr>";
+						});
+						$('#table').html(tableBody);
+					}else{
+
+					}
+				},
+				error:function(response){
+					alert('server error');
+				}
+			});
+		});
+	});
+	</script>
+
+	<hr>
+	<div class="card-box mb-30">
+		<div class="pb-20">
+		<table class="table hover multiple-select-row data-table-export nowrap" id="table">
 			<tr>
 				<th>#</td>
 				<th>Customer Name</td>
@@ -28,5 +78,7 @@
 				</td>
 			</tr>
 			<% } %>
-		</table>					
+		</table>
+		</div>	
+	</div>				
 </div>

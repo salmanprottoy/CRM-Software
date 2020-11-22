@@ -81,4 +81,18 @@ router.post('/delete/:id', (req, res)=>{
 	
 })
 
+router.post('/search',(req,res)=>{
+	var customer = {
+		search : req.body.search,
+		searchBy: req.body.searchBy
+	};
+	customerModel.search(customer, function(results){
+		if(results){
+			res.json({customer: results});
+		}else{
+			res.json({customer:'error'});
+		}
+	});
+});
+
 module.exports = router;
