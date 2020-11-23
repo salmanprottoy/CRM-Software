@@ -1,7 +1,10 @@
 const express 	    = require('express');
 const pdfDocument	= require('pdfkit');
-const fs			= require('fs');
 const fastCsv       = require('fast-csv');
+var fs				= require('fs');
+var pdf 			= require('html-pdf');
+var html 			= fs.readFileSync('././views/accountingSellsHome/customer.ejs', 'utf8');
+var options 		= { format: 'A4' };
 const userModel     = require.main.require('./models/userModel');
 const customerModel = require.main.require('./models/customerModel');
 const productModel  = require.main.require('./models/productModel');
@@ -38,6 +41,25 @@ router.get('/customer', (req, res)=>{
 	});
 
 })
+router.get('/pdf', (req, res)=>{
+
+
+	pdf.create(html, options).toFile('assets/uploads/customerList.pdf', function (err, res) {
+        if (err) { return console.log(err); }
+        else {
+            console.log(res); // { filename: '/app/businesscard.pdf' } 
+            // var datafile = fs.readFileSync('assets/uploads/invoice.pdf');
+            // res.header('content-type', 'application/pdf');
+            // res.send(datafile);
+        }
+	});
+	customerModel.getAll(function(results){
+		console,console.log(results);
+		var uname = req.cookies['uname'];
+		res.render('accountingSellsHome/customer', {customerList: results, uname});
+	});
+
+})
 
 router.get('/report', (req, res)=>{
 	var uname = req.cookies['uname'];
@@ -64,6 +86,10 @@ router.get('/bankInfo', (req, res)=>{
 router.get('/calendar', (req, res)=>{
 	var uname = req.cookies['uname'];
 	res.render('accountingSellsHome/calendar', {uname}); 
+});
+router.get('/profile', (req, res)=>{
+	var uname = req.cookies['uname'];
+	res.render('accountingSellsHome/profile', {uname}); 
 });
 
 module.exports = router;

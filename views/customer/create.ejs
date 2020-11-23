@@ -1,4 +1,12 @@
-
+<div class="pd-20 card-box mb-30">
+	<% if(typeof alerts !='undefined'){alerts.forEach(function(error) {%>
+			<div class="alert alert-warning alert-dismissible fade show mt-10" role="alert">
+			  <strong><%=error.msg%></strong>
+			  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			  </button>
+			</div>
+	<%})}%>
 	<form method="post">
 		<fieldset>
 			<legend>Create Customer</legend>
@@ -22,3 +30,4 @@
 			</table>
 		</fieldset>
 	</form>
+</div>

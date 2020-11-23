@@ -1,49 +1,43 @@
 const express 		= require('express');
-const pdf			= require('html-pdf');
 const pdfDocument	= require('pdfkit');
-var option			= {format: 'A4'};
-const fs			= require('fs');
+var fs				= require('fs');
+var pdf 			= require('html-pdf');
+var html 			= fs.readFileSync('././views/accountingSellsHome/customer.ejs', 'utf8');
+var options 		= { format: 'A4' };
 const customerModel	= require.main.require('./models/customerModel');
+const {check, validationResult} = require('express-validator');
 const router 		= express.Router();
 
 router.get('/create', (req, res)=>{
 	res.render('customer/create'); 
 })
 
-router.post('/create', (req, res)=>{
+router.post('/create',[
+	check('customerName','Customer Name can not be null').not().isEmpty().trim().escape(),
+	check('customerContactNumber','Customer Number can not be null').not().isEmpty().trim().escape(),
+	check('customerAddress','Customer Address can not be null').not().isEmpty().trim().escape(),
+], (req, res)=>{
 
-	var customer = {
-		customerName            : 	req.body.customerName,
-		customerContactNumber   : 	req.body.customerContactNumber,
-		customerAddress	        : 	req.body.customerAddress
-	};
+	const errors = validationResult(req);
+	if(!errors.isEmpty()){
+		const alerts= errors.array();
+		res.render('customer/create',{alerts}); 
+	}else{
 
-	customerModel.insert(customer, function(status){
-		if(status){
-			res.redirect('/accountingSellsHome/customer');
-		}else{
-			res.redirect('customer/create');
-		}
-	});
-})
+		var customer = {
+			customerName            : 	req.body.customerName,
+			customerContactNumber   : 	req.body.customerContactNumber,
+			customerAddress	        : 	req.body.customerAddress
+		};
 
-router.get('/createPdf', (req, res)=>{
-
-	res.render('customerList-pdf',{result:req.body.table}, function(err,html){
-		pdf.create(html, options).toFile('./assets/uploads/customerList.pdf', function(err, res) {
-			if (err) {
-				return console.log(err);
+		customerModel.insert(customer, function(status){
+			if(status){
+				res.redirect('/accountingSellsHome/customer');
+			}else{
+				res.redirect('customer/create');
 			}
-			else{
-				console.log(res); // { filename: '/app/businesscard.pdf' }
-				var dataFile = fs.readFileSync('./assets/uploads/customerList.pdf');
-				res.header = ('content-type','application/pdf');
-				res.send(dataFile);
-			}
-			
-		  });
-	})
-
+		});
+	}
 })
 
 router.get('/edit/:id', (req, res)=>{
