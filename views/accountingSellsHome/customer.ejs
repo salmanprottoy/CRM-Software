@@ -31,13 +31,16 @@
 						'searchBy':searchBy},
 				success:function(response){
 					if(response.customer !== 'error'){
-						var tableBody="<tr><td>#</td><td>Customer Name</td><td>Customer Contact Number</td><td>Customer Address</td><td>Action</td></tr>";
+						var tableBody="<tr><td>#</td><td>Name</td><td>Contact Number</td><td>Address</td><td>Email</td><td>Status</td><td>Gender</td><td>Action</td></tr>";
 						response.customer.forEach(element => {
 							var tableRow="";
 							tableRow+="<td>"+element.id+"</td>";
 							tableRow+="<td>"+element.customerName+"</td>";
 							tableRow+="<td>"+element.customerContactNumber+"</td>";
 							tableRow+="<td>"+element.customerAddress+"</td>";
+							tableRow+="<td>"+element.customerEmail+"</td>";
+							tableRow+="<td>"+element.customerStatus+"</td>";
+							tableRow+="<td>"+element.customerGender+"</td>";
 							tableRow+="<td><a href='../customer/edit/"+element.id+"'>Edit</a> | <a href='../customer/delete/"+element.id+"'>Delete</a></td>";
 							tableBody=tableBody+"<tr>"+tableRow+"</tr>";
 						});
@@ -53,7 +56,6 @@
 		});
 	});
 	</script>
-
 	<hr>
 	<div><a class="btn btn-success" href="/accountingSellsHome/customer/csv" role="button">To CSV</a>
 	</div>
@@ -63,21 +65,27 @@
 	<hr>
 	<div class="card-box mb-30">
 		<div class="pb-20">
-		<table class="table hover multiple-select-row data-table-export nowrap" id="table" name="table">
+		<table class="table hover data-table  nowrap" id="table" name="table">
 			<tr>
-				<th>#</td>
-				<th>Customer Name</td>
-				<th>Customer Contact Number</td>
-				<th>Customer Address</td>
+				<th class="table-plus datatable-nosort">#</td>
+				<th>Name</td>
+				<th>Contact Number</td>
+				<th>Address</td>
+				<th>Email</td>
+				<th>Status</td>
+				<th>Gender</td>
 				<th>Action</td>
 			</tr>
 	
 			<% for(var i=0; i< customerList.length; i++ ){ %>
 			<tr>
-				<td><%= customerList[i].id %></td>
+				<td class="table-plus"><%= customerList[i].id %></td>
 				<td><%= customerList[i].customerName %></td>
 				<td><%= customerList[i].customerContactNumber %></td>
 				<td><%= customerList[i].customerAddress %></td>
+				<td><%= customerList[i].customerEmail %></td>
+				<td><%= customerList[i].customerStatus %></td>
+				<td><%= customerList[i].customerGender %></td>
 				<td>
 					<a href="../customer/edit/<%=customerList[i].id%>">Edit</a>	|
 					<a href="../customer/delete/<%=customerList[i].id%>">delete</a>
@@ -86,5 +94,5 @@
 			<% } %>
 		</table>
 		</div>	
-	</div>				
+	</div>			
 </div>

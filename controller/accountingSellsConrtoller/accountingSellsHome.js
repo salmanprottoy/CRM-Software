@@ -5,11 +5,11 @@ var fs				= require('fs');
 var pdf 			= require('html-pdf');
 var html 			= fs.readFileSync('././views/accountingSellsHome/customer.ejs', 'utf8');
 var options 		= { format: 'A4' };
-const userModel     = require.main.require('./models/userModel');
-const customerModel = require.main.require('./models/customerModel');
-const productModel  = require.main.require('./models/productModel');
-const bankModel     = require.main.require('./models/bankModel');
-const salaryModel   = require.main.require('./models/salaryModel');
+const userModel     = require.main.require('././models/userModel');
+const customerModel = require.main.require('././models/customerModel');
+const productModel  = require.main.require('././models/productModel');
+const bankModel     = require.main.require('././models/bankModel');
+const salaryModel   = require.main.require('././models/salaryModel');
 const router 	    = express.Router();
 router.get('/', (req, res)=>{
 	

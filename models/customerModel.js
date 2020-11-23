@@ -18,14 +18,15 @@ module.exports ={
 
 	},
 	insert: function(customer, callback){
-		var sql = "insert into customer VALUES ('', '"+customer.customerName+"' , '"+customer.customerContactNumber+"' , '"+customer.customerAddress+"')";
+		var sql = "insert into customer VALUES ('', '"+customer.customerName+"' , '"+customer.customerContactNumber+"' , '"+customer.customerAddress+"' , '"+customer.customerEmail+"' , '"+customer.customerStatus+"' , '"+customer.customerGender+"')";
 
 		db.execute(sql, function(status){
+			console.log(sql, status);
 			callback(status);
 		});
 	} ,
 	update: function(customer, callback){
-		var sql = "update customer set customerName='"+customer.customerName+"' , customerContactNumber='"+customer.customerContactNumber+"' , customerAddress='"+customer.customerAddress+"' where id = '"+customer.id+"'";
+		var sql = "update customer set customerName='"+customer.customerName+"' , customerContactNumber='"+customer.customerContactNumber+"' , customerAddress='"+customer.customerAddress+"' , customerEmail='"+customer.customerEmail+"' , customerStatus='"+customer.customerStatus+"' , customerGender='"+customer.customerGender+"' where id = '"+customer.id+"'";
 		db.execute(sql, function(status){
 			callback(status)
 		});

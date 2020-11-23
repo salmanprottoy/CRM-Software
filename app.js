@@ -13,13 +13,13 @@ const login					= require('./controller/login');
 const signup				= require('./controller/signup');
 const forgotPassword		= require('./controller/forgotPassword');
 const home					= require('./controller/home');
-const accountingSellsHome	= require('./controller/accountingSellsHome');
+const accountingSellsHome	= require('./controller/accountingSellsConrtoller/accountingSellsHome');
 const logout				= require('./controller/logout');
 const user					= require('./controller/user');
-const customer				= require('./controller/customer');
-const product				= require('./controller/product');
-const bankInfo				= require('./controller/bankInfo');
-const salary				= require('./controller/salary');
+const customer				= require('./controller/accountingSellsConrtoller/customer');
+const product				= require('./controller/accountingSellsConrtoller/product');
+const bankInfo				= require('./controller/accountingSellsConrtoller/bankInfo');
+const salary				= require('./controller/accountingSellsConrtoller/salary');
 const app 					= express();
 
 app.use(explayouts);
