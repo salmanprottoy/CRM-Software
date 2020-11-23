@@ -1,6 +1,10 @@
-const express = require('express');
+const express 		= require('express');
+const pdf			= require('html-pdf');
+const pdfDocument	= require('pdfkit');
+var option			= {format: 'A4'};
+const fs			= require('fs');
 const customerModel	= require.main.require('./models/customerModel');
-const router = express.Router();
+const router 		= express.Router();
 
 router.get('/create', (req, res)=>{
 	res.render('customer/create'); 
@@ -21,6 +25,25 @@ router.post('/create', (req, res)=>{
 			res.redirect('customer/create');
 		}
 	});
+})
+
+router.get('/createPdf', (req, res)=>{
+
+	res.render('customerList-pdf',{result:req.body.table}, function(err,html){
+		pdf.create(html, options).toFile('./assets/uploads/customerList.pdf', function(err, res) {
+			if (err) {
+				return console.log(err);
+			}
+			else{
+				console.log(res); // { filename: '/app/businesscard.pdf' }
+				var dataFile = fs.readFileSync('./assets/uploads/customerList.pdf');
+				res.header = ('content-type','application/pdf');
+				res.send(dataFile);
+			}
+			
+		  });
+	})
+
 })
 
 router.get('/edit/:id', (req, res)=>{

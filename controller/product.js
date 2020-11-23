@@ -1,31 +1,48 @@
-const express = require('express');
-const productModel	= require.main.require('./models/productModel');
-const router = express.Router();
+const express 					= require('express');
+const {check, validationResult} = require('express-validator');
+const expressValidator 			= require('express-validator');
+const productModel				= require.main.require('./models/productModel');
+const router 					= express.Router();
 
 router.get('/create', (req, res)=>{
 	res.render('product/create'); 
 })
 
-router.post('/create', (req, res)=>{
+router.post('/create',[
+	check('productCode','Product Code can not be null').not().isEmpty().trim().escape(),
+	check('productName','Product Name must be atleast 4 characters long').exists().isLength({min:4}),
+	check('productVendor','Product Vendor must be atleast 4 characters long').exists().isLength({min:4}),
+	check('quantityInStock','Quantity In Stock can not be null').not().isEmpty().trim().escape(),
+	check('buyPrice','Buy Price can not be null').not().isEmpty().trim().escape(),
+	check('sellPrice','Sell Price can not be null').not().isEmpty().trim().escape(),
+	check('productDescription','Product Description can not be null').not().isEmpty().trim().escape()
+], (req, res)=>{
 
-	var product = {
-		productCode         : 	req.body.productCode,
-		productName         : 	req.body.productName,
-        productVendor	    : 	req.body.productVendor,
-        quantityInStock	    :	req.body.quantityInStock,
-		buyPrice            : 	req.body.buyPrice,
-        sellPrice           : 	req.body.sellPrice,
-        productDescription  : 	req.body.productDescription,
-		productImage        : 	req.body.productImage
-	};
+	const errors = validationResult(req);
+	if(!errors.isEmpty()){
+		const alerts= errors.array();
+		res.render('product/create',{alerts}); 
+	}else{
 
-	productModel.insert(product, function(status){
-		if(status){
-			res.redirect('/accountingSellsHome/product');
-		}else{
-			res.redirect('product/create');
-		}
-	});
+		var product = {
+			productCode         : 	req.body.productCode,
+			productName         : 	req.body.productName,
+			productVendor	    : 	req.body.productVendor,
+			quantityInStock	    :	req.body.quantityInStock,
+			buyPrice            : 	req.body.buyPrice,
+			sellPrice           : 	req.body.sellPrice,
+			productDescription  : 	req.body.productDescription,
+			productImage        : 	req.body.productImage
+		};
+
+		productModel.insert(product, function(status){
+			if(status){
+				res.redirect('/accountingSellsHome/product');
+			}else{
+				res.redirect('product/create');
+			}
+		});
+	}
 })
 
 router.get('/edit/:id', (req, res)=>{

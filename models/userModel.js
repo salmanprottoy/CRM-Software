@@ -4,9 +4,11 @@ module.exports ={
 
 	validate: function(user, callback){
 		var sql = "select * from user where username='"+user.username+"' and password='"+user.password+"'";
+		//console.log(sql);
 		db.getResults(sql, function(results){
 			if(results.length > 0){
 				callback(true);
+				callback(results[0]);
 			}else{
 				callback(false);
 			}
