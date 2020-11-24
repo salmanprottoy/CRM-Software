@@ -1,0 +1,45 @@
+<%- include('../partial/header.ejs')%>
+<%- include('../partial/sidebars.ejs')%>
+<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				
+				<!-- Default Basic Forms Start -->
+				<div class="pd-20 card-box mb-30">
+				<form method="post">
+					<div class="form-group row">
+						<label class="col-sm-12 col-md-2 col-form-label">Full Name</label>
+						<div class="col-sm-12 col-md-10">
+							<input class="form-control" type="text" name="username" placeholder="<%=userlist.name%>" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-12 col-md-2 col-form-label">Email</label>
+						<div class="col-sm-12 col-md-10">
+							<input class="form-control" name="email" value="<%=userlist.email%>" type="email" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-12 col-md-2 col-form-label">Telephone</label>
+						<div class="col-sm-12 col-md-10">
+							<input class="form-control" name="phone" value="<%=userlist.phone%>" type="tel" required>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-12 col-md-2 col-form-label">Gender</label>
+						<div class="col-sm-12 col-md-10">
+							<input class="form-control" name="gender" value="<%=userlist.gender%>" type="text" >
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-12 col-md-2 col-form-label">Status</label>
+						<div class="col-sm-12 col-md-10">
+							<input class="form-control" name="status" value="<%=userlist.status%>" type="text" required>
+						</div>
+					</div>
+					<input class="btn btn-primary" type="submit" value="Submit">
+				</form>
+			</div>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,87 @@
+	<%- include('../partial/marketheader.ejs')%>
+	<%- include('../partial/marketsidebars.ejs')%>
+	<div class="main-container">
+		<div class="pd-ltr-20 xs-pd-20-10">
+			<div class="min-height-200px">
+				<!--testing-->
+				<div class="card-box mb-30">                                                                                      
+				  <div class="pd-20">    
+				  <div class="table-title pl-20">
+                    <div class="row">
+                        <div class="col-sm-1.5 pl-20"><a class="btn btn-primary" href="/markethome/csv/<%='leads'%>" role="button">To CSV</a></div>
+                        <div class="col-sm-6 pl-20"><a class="btn btn-primary" href="#" role="button" id="pdf">To PDF</a></div>
+                        <div class="col-sm-4">
+                            <div class="search-box">
+                                <input type="text" id="myInput" placeholder="Search&hellip;">
+                            </div>
+                        </div>
+                    </div>
+                 </div>    
+				  <div class="pd-20">
+				  	<table class="table table-striped" id="leads">
+				    <thead>
+				      <tr>
+				        <th>id</th>
+				        <th>Fullname</th>
+				        <th>email</th>
+				        <th>phone</th>
+				        <th>gender</th>
+				        <th>status</th>
+				      </tr>
+				    </thead>
+				    <tbody id="myTable">
+				    	<% for(var i=0; i< userlist.length; i++ ){ %>
+							<tr>
+								<td><%= userlist[i].id %></td>
+								<td><%= userlist[i].name %></td>
+								<td><%= userlist[i].email %></td>
+								<td><%= userlist[i].phone %></td>
+								<!-- <td>
+									<a href="/user/edit/<%=userlist[i].id%>">Edit</a> | 
+									<a href="/user/delete/<%=userlist[i].id%>">Delete</a>  
+								</td> -->
+								<td><%= userlist[i].gender %></td>
+								<% if(userlist[i].status=='Potential'){%> <td><span class="badge badge-success"><%= userlist[i].status%></span></td> <%}else {%>
+								<td><span class="badge badge-secondary"><%= userlist[i].status%></span></td><%}%>
+								<td><a class="btn btn-primary" href="/clients/profile/<%='leads'%>/<%=userlist[i].id%>">Profile</a></td>  
+								<td><a class="btn btn-primary" href="/clients/delete/<%=userlist[i].id%>/<%='leads'%>">Delete</a></td>
+								<td><a class="btn btn-primary" href="/clients/upgrade/<%=userlist[i].id%>/<%='leads'%>">Upgrade</a></td>
+							</tr>
+						<% } %>
+				    </tbody>
+				  </table
+				  </div>
+				  </div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" 
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" 
+        crossorigin="anonymous"></script>
+
+    <script src="https://gitcdn.xyz/repo/FuriosoJack/TableHTMLExport/v1.0.0/src/tableHTMLExport.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/2.3.5/jspdf.plugin.autotable.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+		   $("#pdf").click(function(){  
+		     $("#leads").tableHTMLExport({
+		      type:'pdf',
+		      filename:'codehim-html-table-to-excel.pdf',
+		    });
+		  });
+		});
+	</script>
+	<script>
+	$(document).ready(function(){
+	  $("#myInput").on("keyup", function() {
+	    var value = $(this).val().toLowerCase();
+	    $("#myTable tr").filter(function() {
+	      $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+	    });
+	  });
+	});
+	</script>
+	

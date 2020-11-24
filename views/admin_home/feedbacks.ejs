@@ -1,0 +1,89 @@
+<%- include('../partials/preloader.ejs')%>
+<%- include('../partials/navbar.ejs')%>
+<%- include('../partials/sidebar_right.ejs')%>
+<%- include('../partials/admin_sidebar')%>
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Subscriber List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Subscriber List</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <h4 class="text-blue h4">Data Table Simple</h4>
+                    <!-- <div class="pull-right">
+                        <a href="/admin/create">
+                            <button type="button" class="btn btn-primary"><i class="fa fa-user-plus"></i></button>
+                        </a>
+                     </div> -->
+                </div>
+               
+                <div class="pb-20">
+
+                    
+                    <table class="table hover data-table  nowrap ">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">ID</th>
+                                <th>UserName</th>
+                                <th>Comment</th>
+                                <th>Date</th>
+                                <th>IsSolved</th>
+                               
+                                <th class="datatable-nosort">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i< userlist.length; i++ ){ %>
+                            <tr>
+                                <td class="table-plus"><%= userlist[i].id %></td>
+                                <td><%= userlist[i].username %></td>
+                                <td><%= userlist[i].comment %></td>
+                                <td><%= userlist[i].date %></td>
+                                <td><%= userlist[i].isSolved %></td>
+                                
+                                <td>
+
+                                
+                                        <div class="dropdown">
+                                            <a class="dropdown-item" href="/admin_home/feedback/solved/<%=userlist[i].id%>"><i class="dw dw-delete-3"></i> Solved</a>
+                                                
+                                            </a>
+                                            
+                                        </div>
+                                    
+                                </td>
+                            </tr>
+                            <% } %>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

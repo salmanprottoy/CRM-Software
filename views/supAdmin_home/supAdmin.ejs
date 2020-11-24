@@ -1,0 +1,145 @@
+<%- include('../partials/preloader.ejs')%>
+<div class="header">
+    <div class="header-left" display="hidden">
+        <div class="menu-icon dw dw-menu"></div>
+        <div class="search-toggle-icon dw dw-search2" data-toggle="header_search"></div>
+        <div class="header-search">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" placeholder="Search Here"
+                    aria-label="Recipient's username" aria-describedby="button-addon2">
+                <div class="input-group-append">
+                    <button class="btn btn-outline-secondary" type="button" id="button-addon2"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+           
+        </div>
+
+    </div>
+
+    <div class="header-right">
+        <div class="dashboard-setting user-notification">
+            <div class="dropdown">
+                <a class="dropdown-toggle no-arrow" href="javascript:;" data-toggle="right-sidebar">
+                    <i class="dw dw-settings2"></i>
+                </a>
+            </div>
+        </div>
+        
+        <div class="user-info-dropdown">
+            <div class="dropdown" style="padding-top:-10px ;">
+                <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                    
+                    <span class="user-name"><%= uname %></span>
+                </a>
+                <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                    <a class="dropdown-item" href="profile.html"><i class="dw dw-user1"></i> Profile</a>
+                    <a class="dropdown-item" href="profile.html"><i class="dw dw-settings2"></i> Setting</a>
+                    <a class="dropdown-item" href="faq.html"><i class="dw dw-help"></i> Help</a>
+                    <a class="dropdown-item" href="login.html"><i class="dw dw-logout"></i> Log Out</a>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+<%- include('../partials/sidebar_right.ejs')%>
+<%- include('../partials/supAdmin_sidebar')%>
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Subscriber List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Subscriber List</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <!-- <div class="card-box mb-30" style="float: right; padding-right: 20px; padding-top: 20px;">
+                <a href="/user/create">
+                    <button type="button" class="btn btn-primary">Primary</button>
+                </a>
+             </div> -->
+
+
+
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <div class="clearfix">
+                        <div class="pull-left">
+                            <h4 class="text-blue h4">Super Admin List</h4>
+                            
+                        </div>
+                        <div class="pull-right">
+                            <a href="/supAdmin_home/supAdmin/create">
+                                <button type="button" class="btn btn-primary"><i class="fa fa-user-plus"></i></button>
+                            </a>
+                         </div>
+                    </div>
+
+                </div>
+                
+                <div class="pb-20">
+
+                    <table class="table hover data-table  nowrap ">
+                        <thead>
+                            <tr>
+                                <th class="table-plus datatable-nosort">ID</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Email</th>
+                                <th>Gender</th>
+                               
+                                <th class="datatable-nosort">Action</th>
+                                <th>Address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% for(var i=0; i< userlist.length; i++ ){ %>
+                            <tr>
+                                <td class="table-plus"><%= userlist[i].id %></td>
+                                <td><%= userlist[i].Name %></td>
+                                <td><%= userlist[i].Mobile %></td>
+                                <td><%= userlist[i].Email %></td>
+                                <td><%= userlist[i].Gender %></td>
+                               
+                                <td>
+
+                                
+                                        <div class="dropdown">
+                                            <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle" href="#" role="button" data-toggle="dropdown">
+                                                <i class="dw dw-more"></i>
+                                            </a>
+                                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
+                                                <a class="dropdown-item" href="#"><i class="dw dw-eye"></i> View</a>
+                                               
+                                            </div>
+                                        </div>
+                                    
+                                </td>
+                                <td><%= userlist[i].Address %></td>
+                            </tr>
+                            <% } %>
+
+                        </tbody>
+                    </table>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

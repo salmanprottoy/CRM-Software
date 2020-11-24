@@ -1,0 +1,97 @@
+
+
+
+
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Add Super Adminnnnnnn</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Add Super Admin</li>
+							</ol>
+						</nav>
+					</div>
+
+				</div>
+			</div>
+
+
+
+			<% if(typeof alerts != 'undefined'){ %>
+                <% alerts.forEach(function (error) {%>
+    
+    
+                    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <%= error.msg %>
+                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                <% }) %>
+                <% } %>
+
+			<div class="card-box">
+                <div class="pd-20 bg-white border-radius-4 box-shadow mb-30">
+                    <form action="" method="POST">
+                        <div class="form-group">
+                            <label>Package</label>
+                            <!-- <select class="form-control" name="type" aria-valuetext="<%=type%>">
+                                <option disabled selected>Choose..</option>
+                                <option value="Standard">Standard</option>
+                                <option value="Advanced">Advanced</option>
+                                <option value="Enterprise">Enterprise</option>
+                            </select> -->
+                            <input class="form-control" type="text" name="type" value="<%=type%>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Name</label>
+                            <input class="form-control" type="text" name="cname" value="<%=cname%>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Company Email</label>
+                            <input class="form-control" placeholder="bootstrap@example.com" type="email" name="cemail" value="<%=cemail%>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Contact No.</label>
+                            <input class="form-control" type="number" name="cmobile" value="<%=cmobile%>" readonly>
+                        </div>
+                        <!-- <div class="form-group">
+                            <label>Total Employee</label>
+                            <input class="form-control" type="number" name="cemployee">
+                        </div> -->
+                        <div class="form-group">
+                            <label>Address</label>
+                            <input class="form-control" name="caddress" value="<%=caddress%>" readonly>
+                        </div>
+                        <div class="form-group">
+                            <label>Manager Name</label>
+                            <input class="form-control" type="text" name="cmname" value="<%=cmname%>" readonly>
+                        </div>
+                        
+                        <div class="col-md-12 col-sm-12 mb-30">
+            
+                            <div class="pd-20 card-box height-100-p"></div>
+                                <div class="btn-list" style="float: right;">
+                                   
+                                    <button type="submit" class="btn btn-outline-success">Verify</button>
+            
+            
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+
+
+		</div>
+	</div>
+</div>

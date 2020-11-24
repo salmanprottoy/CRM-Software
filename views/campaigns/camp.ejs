@@ -1,0 +1,72 @@
+<%- include('../partial/marketheader.ejs')%>
+	<%- include('../partial/marketsidebars.ejs')%>
+	<div class="main-container">
+	<div>
+		<select class="form-control mr-sm-2" id="searchBy">
+			<option selected hidden class='mb-6'>Search By</option>
+			<option value="id">Campaign id</option>
+			<option value="audience">Campaign audience</option>
+		</select>
+		<br>
+        <input class="form-control mr-sm-2 mb-6" type="text" name="search" id="search" placeholder="Search Customer" aria-label="Search Customer">
+        <br>
+	</div>
+	
+	<script type="text/javascript">	
+		$(document).ready(function(){
+		$('#search').on('keyup',function(){
+			var search = $("#search").val();
+			var searchBy = $("#searchBy").val();
+			$.ajax({
+				url:'/campaigns/search',
+				method: 'post',
+				datatype : 'json',
+				data : {'search':search,
+						'searchBy':searchBy},
+				success:function(response){
+					if(response.userlist !== 'error'){
+						var tableBody="<tr><td>id</td><td>offer</td><td>template</td><td>audience</td><td>Action</td></tr>";
+						response.userlist.forEach(element => {
+							var tableRow="";
+							tableRow+="<td>"+element.eventid+"</td>";
+							tableRow+="<td>"+element.eventname+"</td>";
+							tableRow+="<td>"+element.eventdescription+"</td>";
+							tableRow+="<td>"+element.audience+"</td>";
+							tableRow+="<td><a class='btn btn-primary' href='/campaigns/mail'>SEND</a></td>";
+							tableBody=tableBody+"<tr>"+tableRow+"</tr>";
+						});
+						$('#table').html(tableBody);
+					}else{
+					}
+				
+				}
+			});
+		});
+	});
+	</script>
+
+	<div class="card-box mb-30">
+		<div class="pb-20">
+		<table class="table hover multiple-select-row data-table-export nowrap" id="table" name="table">
+			<tr>
+				<th>id</td>
+				<th>offer</td>
+				<th>body</td>
+				<th>audience</td>
+			</tr>
+	
+			<% for(var i=0; i< userlist.length; i++ ){ %>
+			<tr>
+				<td><%= userlist[i].eventid %></td>
+				<td><%= userlist[i].eventname %></td>
+				<td><%= userlist[i].eventdescription %></td>
+				<td><%= userlist[i].audience %></td>
+				<td>
+					<a class="btn btn-primary" href='/campaigns/mail/<%=userlist[i].eventid%>'>SEND</a>
+				</td>
+			</tr>
+			<% } %>
+		</table>
+		</div>	
+	</div>				
+</div>

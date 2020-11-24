@@ -1,0 +1,103 @@
+
+
+
+<div class="main-container">
+	<div class="pd-ltr-20 xs-pd-20-10">
+		<div class="min-height-200px">
+			<div class="page-header">
+				<div class="row">
+					<div class="col-md-6 col-sm-12">
+						<div class="title">
+							<h4>Add  Adminnnnnnn</h4>
+						</div>
+						<nav aria-label="breadcrumb" role="navigation">
+							<ol class="breadcrumb">
+								<li class="breadcrumb-item"><a href="">Home</a></li>
+								<li class="breadcrumb-item active" aria-current="page">Add  Admin</li>
+							</ol>
+						</nav>
+					</div>
+
+				</div>
+			</div>
+
+
+
+		
+			<% if(typeof alerts != 'undefined'){ %>
+				<% alerts.forEach(function (error) {%>
+	
+	
+					<div class="alert alert-warning alert-dismissible fade show" role="alert">
+						<%= error.msg %>
+						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+				<% }) %>
+				<% } %>
+
+			<div class="pd-20 card-box mb-30">
+
+				<div class="clearfix">
+					<h4 class="text-blue h4">Add  Admin </h4>
+
+				</div>
+
+
+				<form  method="POST" >
+					
+					
+					<div class="form-group">
+						<label>Title</label>
+						<!-- <select class="form-control" name="title" aria-readonly="true">
+							<option disabled >Choose..</option>
+							<option value="Meeting" selected>Meeting</option>
+							<option value="Female">Female</option>
+							<option value="Others">Others</option>
+                        </select> -->
+                        <input class="form-control" type="text" placeholder="" id="meeting" name="title" value="Meeting" readonly>
+                    </div>
+                    <div class="form-group">
+						<label>Concerned to</label>
+						<select class="form-control" name="concerned_to" >
+							<option disabled selected>Choose..</option>
+							<option value="All" >All</option>
+							<option value="Super Admin">Super Admin</option>
+							<option value="Admin">Admin</option>
+						</select>
+                    </div>
+                    <% const today = new Date().toLocaleDateString(); %>
+					<div class="form-group">
+						<label>Date</label>
+						<input class="form-control" type="text" placeholder="" id="date" name="date" value="<%= today %>" readonly>
+						
+					</div>
+					
+					<div class="form-group">
+						<label>Details</label>
+						<textarea class="form-control" name="details"></textarea>
+					</div>
+					
+					<div class="col-md-12 col-sm-12 mb-30">
+
+						<div class="pd-20 card-box height-100-p">
+							<div class="btn-list" style="float: right;">
+							
+								<button type="submit" class="btn btn-outline-success">Submit</button>
+					
+
+							</div>
+						</div>
+					</div>
+				</form>
+
+
+
+			</div>
+
+
+
+		</div>
+	</div>
+</div>
