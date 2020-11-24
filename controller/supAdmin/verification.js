@@ -137,7 +137,7 @@ router.post('/verify/:id', [
 				    console.log("Message sent: %s", info.messageId);
 
 					console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-					alert("Email sent successfully");
+					//alert("Email sent successfully");
 					res.redirect('/supAdmin_home/verification');
 				} else {
 					res.render('verification/verify');
