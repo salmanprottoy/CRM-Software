@@ -46,7 +46,7 @@
 							tableRow+="<td>"+element.buyPrice+"</td>";
                             tableRow+="<td>"+element.sellPrice+"</td>";
 							tableRow+="<td>"+element.productDescription+"</td>";
-							tableRow+="<td><a href='../product/edit/"+element.id+"'>Edit</a> | <a href='../product/delete/"+element.id+"'>Delete</a></td>";
+							tableRow+="<td><a href='../accountingSellsHome/product/edit/"+element.id+"'>Edit</a> | <a href='../accountingSellsHome/product/delete/"+element.id+"'>Delete</a></td>";
 							tableBody=tableBody+"<tr>"+tableRow+"</tr>";
 						});
 						$('#table').html(tableBody);
@@ -89,8 +89,8 @@
                 <td><%= productList[i].productDescription %></td>
                 <!-- <td><%= productList[i].productImage %></td> -->
 				<td>
-                    <a href="../product/edit/<%=productList[i].id%>">Edit</a><br>
-                    <a href="../product/delete/<%=productList[i].id%>">Delete</a>
+                    <a href="../accountingSellsHome/product/edit/<%=productList[i].id%>">Edit</a><br>
+                    <a href="../accountingSellsHome/product/delete/<%=productList[i].id%>">Delete</a>
 				</td>
 			</tr>
 			<% } %>

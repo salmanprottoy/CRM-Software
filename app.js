@@ -75,10 +75,10 @@ app.use('/supAdmin_home/package', package);
 app.use('/admin_home/feedback', feedbackadmin);
 app.use('/supAdmin_home/meeting', meeting);
 app.use('/accountingSellsHome', accountingSellsHome);
-app.use('/customer', customer);
-app.use('/product', product);
-app.use('/bankInfo', bankInfo);
-app.use('/salary', salary);
+app.use('/accountingSellsHome/customer', customer);
+app.use('/accountingSellsHome/product', product);
+app.use('/accountingSellsHome/bankInfo', bankInfo);
+app.use('/accountingSellsHome/salary', salary);
 
 //route
 app.get('/', (req, res)=>{

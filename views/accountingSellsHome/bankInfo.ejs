@@ -36,7 +36,7 @@
 							tableRow+="<td>"+element.accountName+"</td>";
 							tableRow+="<td>"+element.accountNumber+"</td>";
 							tableRow+="<td>"+element.bankName+"</td>";
-							tableRow+="<td><a href='../bankInfo/edit/"+element.id+"'>Edit</a></td>";
+							tableRow+="<td><a href='../accountingSellsHome/bankInfo/edit/"+element.id+"'>Edit</a></td>";
 							tableBody=tableBody+"<tr>"+tableRow+"</tr>";
 						});
 						$('#table').html(tableBody);
@@ -69,7 +69,7 @@
                 <td><%= bankInfo[i].accountNumber %></td>
                 <td><%= bankInfo[i].bankName %></td>
                 <td>
-                    <a href="../bankInfo/edit/<%=bankInfo[i].id%>">Edit</a>
+                    <a href="../accountingSellsHome/bankInfo/edit/<%=bankInfo[i].id%>">Edit</a>
                 </td>
             </tr>
             <% } %>
