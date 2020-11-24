@@ -99,6 +99,8 @@ router.post('/profile/:table/:id', (req, res)=>{
 		phone:req.body.phone,
 		status:req.body.status
 	};
+	console.log("ppppppp");
+	console.log(user);
 	clientsModel.update(user,tab,function(status){
 		if(status)
 		{

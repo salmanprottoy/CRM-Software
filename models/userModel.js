@@ -7,10 +7,10 @@ module.exports ={
 		//console.log(sql);
 		db.getResults(sql, function(results){
 			if(results.length > 0){
-				callback(true);
-				callback(results[0]);
+				callback(true,results);
 			}else{
-				callback(false);
+				
+				
 			}
 		});
 	},
@@ -30,16 +30,16 @@ module.exports ={
 
 	},
 	insert: function(user, callback){
-		var sql = "insert into user VALUES ('', '"+user.username+"' , '"+user.password+"' , '"+user.type+"')";
+		var sql = "insert into user VALUES ('', '"+user.username+"' , '"+user.password+"' , '"+user.type+"','','','','')";
 		
-		//console.log(sql);
+		console.log(sql);
 
 		db.execute(sql, function(status){
 			callback(status);
 		});
 	},
 	update: function(user, callback){
-		var sql = "update user set username='"+user.username+"' , password='"+user.password+"' , type='"+user.type+"' where id = '"+user.id+"'";
+		var sql = "update user set username='"+user.username+"' , contactNumber='"+user.phone+"', email='"+user.email+"' , designation='"+user.designation+"' where id = '"+user.id+"'";
 		db.execute(sql,function(status){
 			callback(status)
 		});

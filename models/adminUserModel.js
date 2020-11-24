@@ -11,6 +11,8 @@ module.exports ={
 			//	console.log("validate hoise");
 				callback(results[0]);
 				//console.log(results[0]);
+			}else{
+				callback(false);
 			}
 		});
 	},

@@ -49,7 +49,6 @@ app.use(cookieParser());
 app.use(expfileupload());
 
 app.use('',function(req, res, next) {
-	console.log(req.session.username);
   res.locals.glob = req.session.use;
   next();
 });
