@@ -6,6 +6,12 @@ const verifyModel = require('../../models/verifyModel');
 const subscriberModel = require('../../models/subscriberModel');
 const feedbackModel = require('../../models/feedbackModel');
 const noticeModel = require('../../models/noticeModel');
+const adminreportModel = require('../../models/adminreportModel');
+// const pdfMake = require('pdfmake');
+const pdfMake 					  = require('../../assets/pdfmake/pdfmake');
+const vfsFonts 					  = require('../../assets/pdfmake/vfs_fonts');
+
+pdfMake.vfs = vfsFonts.pdfMake.vfs;
 
 // const adminUserModel = require.main.require('../../models/verifyModel');
 const router 	= express.Router();
@@ -88,7 +94,60 @@ router.get('/template', (req, res)=>{
 })
 router.get('/financial', (req, res)=>{
 	var uname = req.cookies['uname'];
-	res.render('supAdmin_home/financialstatus'); 
+	res.render('supAdmin_home/financialstatus',{uname}); 
+})
+router.post('/financial', (req, res)=>{
+	var uname = req.cookies['uname'];
+	adminreportModel.getreportdata(function(results){
+		var body = [['Year','Month', 'Income']];
+			results.forEach(element => {
+				body.push([element.Year,element.Month,element.Income]);
+			});
+			var table = {
+				headerRows : 1,
+				widths : ['auto','auto','auto'],
+				body : body
+			};
+			console.log(table);
+			var documentDefinition = {
+				info: {
+					title: 'Report Document',
+					author: 'Md. Sadek Rayhan Mahi',
+					subject: 'Income status',
+					keywords: 'income',
+				},
+				content:[
+					{
+						text: 'Income status', style: 'header'
+					},
+					{
+					  layout: 'lightHorizontalLines',
+					  table: table
+					}
+				  ],
+				  styles: {
+					header: {
+					  fontSize: 22,
+					  bold: true
+					}
+				  }
+			};
+			console.log(documentDefinition);
+			const pdfDoc = pdfMake.createPdf(documentDefinition);
+			pdfDoc.getBase64((data)=>{
+				res.writeHead(200, 
+				{
+					'Content-Type': 'application/pdf',
+					'Content-Disposition':'attachment;filename="report.pdf"'
+				});
+				console.log("header");
+				const download = Buffer.from(data.toString('utf-8'), 'base64');
+				res.end(download);
+			});
+			
+	});
+	
+	
 })
 
 module.exports = router;

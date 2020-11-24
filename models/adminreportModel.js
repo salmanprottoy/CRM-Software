@@ -12,12 +12,11 @@ module.exports ={
 			}
 		});
 	},
-	getById: function(id, callback){
-		var sql = "select * from verifiysubscriber where id='"+id+"'";
+	getreportdata: function( callback){
+		var sql = "select year(date) as Year, month(date) as Month, sum(amount) as Income from report group by year(date), month(date)";
+		console.log(sql);
 		db.getResults(sql, function(results){
-			if(results.length > 0 ){
-				callback(results[0]);
-			}
+			callback(results);
 		});
 	},
 	getAll: function(callback){

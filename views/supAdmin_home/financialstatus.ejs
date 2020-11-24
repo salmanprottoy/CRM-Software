@@ -1,5 +1,61 @@
-
-<%- include('../partials/preloader.ejs')%>
 <%- include('../partials/navbar.ejs')%>
 <%- include('../partials/sidebar_right.ejs')%>
 <%- include('../partials/supAdmin_sidebar')%>
+
+
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Subscriber List</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Subscriber List</li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <h4 class="text-blue h4">Data Table Simple</h4>
+
+                </div>
+
+                <div class="pb-20">
+                    <form action="" method="POST">
+                        <div class="form-group">
+                            <label>Package</label>
+                            <select class="form-control" name="type" id="subscription_type">
+                                <option disabled selected>Choose..</option>
+                                <option value="1">Total income of Last Month</option>
+                                <option value="2">Total income of Last year</option>
+                                <!-- <option value="Enterprise">Enterprise</option> -->
+                            </select>
+                        </div>
+                        <div class="pull-center">
+
+                            <input type="submit" class="btn btn-primary" value="Generate PDF"
+                                style="align-self: center;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,7 +3,18 @@ $(document).ready(function(){
         
         $('#alert').html("");
     });
-    
+    // $('#subscription_type').focusout(function(){
+	// 	var type = $("subscription_type").val();
+	// 	$.ajax({
+	// 		url: '/supAdmin_home/supAdmin/type',
+	// 		method: 'post',
+	// 		datatype : 'json',
+	// 		data : {'type':type},
+	// 		success:function(response){
+	// 			if(response)
+	// 		}
+	// 	})
+	// })
     
     $('#unamecreate').focusout(function(){
 		var username = $("#unamecreate").val();

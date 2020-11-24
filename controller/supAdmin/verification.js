@@ -72,10 +72,18 @@ router.get('/verify/:id', (req, res) => {
 			cmobile: result.Contact_No,
 
 			caddress: result.Company_Address,
-			cmname: result.Manager_Name
+			cmname: result.Manager_Name,
+			
 		};
+		if(result.Subscription_Type == "Stand"){
+			var amount = "100";
+		}else if(result.Subscription_Type == "Advan"){
+			var amount = "150";
+		}else{
+			var amount = "250";
+		}
 
-		res.render('verification/verify', user);
+		res.render('verification/verify', {user:user,amount});
 	});
 	
 
@@ -109,36 +117,42 @@ router.post('/verify/:id', [
 				cmobile: req.body.cmobile,
 
 				caddress: req.body.caddress,
-				cmname: req.body.cmname
-
+				cmname: req.body.cmname,
+date:req.body.date,
+fee:req.body.fee
 
 			};
 
 
 			subscriberModel.insert(user, async function (status) {
 				if (status) {
-					let transporter = nodemailer.createTransport({
-				        host: "smtp.ethereal.email",
-				        port: 587,
-				        secure: false, // true for 465, false for other ports
-				        auth: {
-				            user: 'leola.bins@ethereal.email', // ethereal user
-				            pass: 'D9nvuffNUCRta84fmH', // ethereal password
-				        },
-				    });
-				    
-				    let info = await transporter.sendMail({
-					    from: '"DESKAPP" <deskapp123@yahoo.com>', // sender address
-					    to: user.cemail, // list of receivers
-					    subject: "Payment Done", // Subject line
-						text: "Your 1 month '"+user.type+"'subscription of DESKAPP activated successfully. ",
-						html: "<a href='http://localhost:3000/login/register'>Click Here</a> to register"
-					  });
-				    console.log("Message sent: %s", info.messageId);
-
-					console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-					//alert("Email sent successfully");
-					res.redirect('/supAdmin_home/verification');
+					verificationModel.insertreport(user,async function(status){
+						if( status){
+							let transporter = nodemailer.createTransport({
+								host: "smtp.ethereal.email",
+								port: 587,
+								secure: false, // true for 465, false for other ports
+								auth: {
+									user: 'leola.bins@ethereal.email', // ethereal user
+									pass: 'D9nvuffNUCRta84fmH', // ethereal password
+								},
+							});
+							
+							let info = await transporter.sendMail({
+								from: '"DESKAPP" <deskapp123@yahoo.com>', // sender address
+								to: user.cemail, // list of receivers
+								subject: "Payment Done", // Subject line
+								text: "Your 1 month '"+user.type+"'subscription of DESKAPP activated successfully. ",
+								html: "<a href='http://localhost:3000/login/register'>Click Here</a> to register"
+							  });
+							console.log("Message sent: %s", info.messageId);
+		
+							console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+							//alert("Email sent successfully");
+							res.redirect('/supAdmin_home/verification');
+						}
+					});
+					
 				} else {
 					res.render('verification/verify');
 				}
