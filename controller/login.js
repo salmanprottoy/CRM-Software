@@ -39,11 +39,8 @@ router.post('/', (req, res)=>{
 			req.session.username=results[0].username;
 			req.session.idd = results[0].id;
 			req.session.pass = results[0].password;
-			if(user.type == "superadmin"){
-				res.redirect('/supAdmin_home');
-			}
-			else if(user.type == "admin"){
-				res.redirect('/admin_home');
+			if(user.type == "Manager"){
+				res.redirect('/manager_home');
 			}
 			else if(user.type == "accountingSells"){
 				res.redirect('/accountingSellsHome');
@@ -134,9 +131,16 @@ router.post('/register', [
 
 	userModel.insert(user, function (status) {
 		if (status) {
-			//req.session.uname = req.body.username;
-			//	res.cookie('uname', req.body.username);
-			res.redirect('/login');
+			//console.log("usermodel");
+			adminUserModel.insert(user,function(status){
+				if(status){
+					//console.log("adminusermodel");
+					res.redirect('/login');
+				}else{
+					res.redirect('/login/register');
+				}
+			})
+			
 		} else {
 			res.redirect('/login/register');
 		}
