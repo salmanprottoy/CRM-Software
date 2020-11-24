@@ -1,9 +1,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
-var fs = require('fs');
+
 var pdf = require('html-pdf');
-var html = fs.readFileSync('././views/supAdmin_home/invoice.ejs', 'utf8');
-var options = { format: 'A4' };
+const nodemailer = require("nodemailer");
+const fs 			= require("fs")
+let alert = require('alert');
+
 
 
 const { check, validationResult } = require('express-validator');
@@ -113,17 +115,29 @@ router.post('/verify/:id', [
 			};
 
 
-			subscriberModel.insert(user, function (status) {
+			subscriberModel.insert(user, async function (status) {
 				if (status) {
-					pdf.create(html, options).toFile('assets/uploads/invoice.pdf', function (err, res) {
-						if (err) { return console.log(err); }
-						else {
-							console.log(res); // { filename: '/app/businesscard.pdf' } 
-							// var datafile = fs.readFileSync('assets/uploads/invoice.pdf');
-							// res.header('content-type', 'application/pdf');
-							// res.send(datafile);
-						}
-					});
+					let transporter = nodemailer.createTransport({
+				        host: "smtp.ethereal.email",
+				        port: 587,
+				        secure: false, // true for 465, false for other ports
+				        auth: {
+				            user: 'leola.bins@ethereal.email', // ethereal user
+				            pass: 'D9nvuffNUCRta84fmH', // ethereal password
+				        },
+				    });
+				    
+				    let info = await transporter.sendMail({
+					    from: '"DESKAPP" <deskapp123@yahoo.com>', // sender address
+					    to: user.cemail, // list of receivers
+					    subject: "Payment Done", // Subject line
+						text: "Your 1 month '"+user.type+"'subscription of DESKAPP activated successfully. ",
+						html: "<a href='http://localhost:3000/login/register'>Click Here</a> to register"
+					  });
+				    console.log("Message sent: %s", info.messageId);
+
+					console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+					alert("Email sent successfully");
 					res.redirect('/supAdmin_home/verification');
 				} else {
 					res.render('verification/verify');
