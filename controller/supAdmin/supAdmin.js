@@ -10,7 +10,8 @@ const app = express();
 const urlencodedparser = bodyParser.urlencoded({ extended: false });
 
 router.get('/create', (req, res) => {
-	res.render('supAdmin/create');
+	var message = null;
+	res.render('supAdmin/create',{message});
 })
 
 
@@ -24,14 +25,15 @@ router.post('/create', [
 	check('email', 'Email is not valid').isEmail().normalizeEmail()
 
 ], (req, res) => {
+	var message = null;
 	const errors = validationResult(req);
 	if (!errors.isEmpty()) {
 		console.log(errors.array());
 		const alerts = errors.array();
 
-		res.render('supAdmin/create', { alerts });
+		res.render('supAdmin/create', { alerts , message});
 	} else {
-		message = "";
+		 
 		//console.log("supadmin e dhuksi");
 		var supAdmin = {
 			username: req.body.username,
@@ -42,7 +44,7 @@ router.post('/create', [
 			gender: req.body.gender,
 			address: req.body.address,
 			password: req.body.password,
-			file: req.files.image,
+			file: req.files.image
 			
 
 		};
@@ -54,29 +56,30 @@ router.post('/create', [
 			file.mv('./assets/uploads/' + file.name, function (err) {
 				if (err == null) {
 				console.log("Image uploaded");
+				supModel.insert(supAdmin,image, function (status) {
+					if (status) {
+						adminUserModel.insert(supAdmin, function (status) {
+							if (status) {
+								res.redirect('/supAdmin_home/supAdmin');
+							} else {
+								res.render('supAdmin/create',{message});
+							}
+						});
+					} else {
+						res.render('supAdmin/create',{message});
+					}
+				});
 				} else {
 					console.log("Image not uploaded");
 				}
 			});
-		} else {
-			message = "Invalid extension";
-			res.render('supAdmin/create', { message });
-			
+		
+		}else{
+			var message = "Invalid  Image extension";
+			res.render('supAdmin/create', { message  });
 		}
 
-		supModel.insert(supAdmin,image, function (status) {
-			if (status) {
-				adminUserModel.insert(supAdmin, function (status) {
-					if (status) {
-						res.redirect('/supAdmin_home/supAdmin');
-					} else {
-						res.render('supAdmin/create');
-					}
-				});
-			} else {
-				res.render('supAdmin/create');
-			}
-		});
+		
 	}
 
 })

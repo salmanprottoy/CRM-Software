@@ -93,7 +93,7 @@ router.post('/adminlogin', (req, res)=>{
 			}
 			else{
 				var  message = "Wrong Username or password";
-				console.log(message);
+				//console.log(message);
 				res.render('login/adminlogin',{message : message});
 				
 			}
