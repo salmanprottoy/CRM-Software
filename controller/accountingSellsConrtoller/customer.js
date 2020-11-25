@@ -65,7 +65,20 @@ router.get('/edit/:id', (req, res)=>{
 })
 
 
-router.post('/edit/:id', (req, res)=>{
+router.post('/edit/:id', [
+	check('customerName','Customer Name can not be null').not().isEmpty().trim().escape(),
+	check('customerContactNumber','Customer Number can not be null').not().isEmpty().trim().escape(),
+	check('customerAddress','Customer Address can not be null').not().isEmpty().trim().escape(),
+	check('customerEmail','Customer Email can not be null').not().isEmpty().trim().escape(),
+	check('customerStatus','Customer Status can not be null').not().isEmpty().trim().escape(),
+	check('customerGender','Customer Gender can not be null').not().isEmpty().trim().escape(),
+], (req, res)=>{
+
+	const errors = validationResult(req);
+	if(!errors.isEmpty()){
+		const alerts= errors.array();
+		res.render('customer/create',{alerts}); 
+	}else{
 
 	var customer = {
 		id		                :	req.params.id,
@@ -84,6 +97,7 @@ router.post('/edit/:id', (req, res)=>{
 			res.render('customer/edit', customer);
 		}
 	});
+	}
 })
 
 router.get('/delete/:id', (req, res)=>{

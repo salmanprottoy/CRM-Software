@@ -64,7 +64,21 @@ router.get('/edit/:id', (req, res)=>{
 })
 
 
-router.post('/edit/:id', (req, res)=>{
+router.post('/edit/:id', [
+	check('productCode','Product Code can not be null').not().isEmpty().trim().escape(),
+	check('productName','Product Name must be atleast 4 characters long').exists().isLength({min:4}),
+	check('productVendor','Product Vendor must be atleast 4 characters long').exists().isLength({min:4}),
+	check('quantityInStock','Quantity In Stock can not be null').not().isEmpty().trim().escape(),
+	check('buyPrice','Buy Price can not be null').not().isEmpty().trim().escape(),
+	check('sellPrice','Sell Price can not be null').not().isEmpty().trim().escape(),
+	check('productDescription','Product Description can not be null').not().isEmpty().trim().escape()
+], (req, res)=>{
+
+	const errors = validationResult(req);
+	if(!errors.isEmpty()){
+		const alerts= errors.array();
+		res.render('product/create',{alerts}); 
+	}else{
 
 	var product = {
 		id		            :	req.params.id,
@@ -85,6 +99,7 @@ router.post('/edit/:id', (req, res)=>{
 			res.render('product/edit', product);
 		}
 	});
+	}
 })
 
 router.get('/delete/:id', (req, res)=>{
