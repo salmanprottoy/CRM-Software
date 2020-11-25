@@ -49,11 +49,12 @@
                             <tr>
                                 <th class="table-plus datatable-nosort">ID</th>
                                 <th>UserName</th>
-                                <th>Comment</th>
+                               
                                 <th>Date</th>
                                 <th>IsSolved</th>
                                
                                 <th class="datatable-nosort">Action</th>
+                                <th>Comment</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -61,12 +62,13 @@
                             <tr>
                                 <td class="table-plus"><%= userlist[i].id %></td>
                                 <td><%= userlist[i].username %></td>
-                                <td><%= userlist[i].comment %></td>
+                                
                                 <td><%= userlist[i].date %></td>
                                 <td><%= userlist[i].isSolved %></td>
                                 
                                 <td>
-
+                                    <% if (userlist[i].isSolved != 'solved'){ %>
+                                 
                                 
                                         <div class="dropdown">
                                             <a class="dropdown-item" href="/admin_home/feedback/solved/<%=userlist[i].id%>"><i class="dw dw-delete-3"></i> Solved</a>
@@ -74,8 +76,10 @@
                                             </a>
                                             
                                         </div>
-                                    
+                                        <% } %>    
                                 </td>
+                                <td><%= userlist[i].comment %></td>
+                                
                             </tr>
                             <% } %>
 

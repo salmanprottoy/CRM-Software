@@ -50,6 +50,9 @@ router.post('/', (req, res)=>{
 				res.redirect('/markethome');
 				console.log(user.username);
 			}
+			else{
+				res.redirect('/login');
+			}
 
 
 		}else{
@@ -85,10 +88,10 @@ router.post('/adminlogin', (req, res)=>{
 				type: result.type
 			};
 			console.log(user);
-			if(user.type == "superadmin"){
+			if(user.type == "Super Admin"){
 				res.redirect('/supAdmin_home');
 			}
-			else if(user.type == "admin"){
+			else if(user.type == "Admin"){
 				res.redirect('/admin_home');
 			}
 			else{

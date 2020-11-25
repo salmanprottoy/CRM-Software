@@ -19,7 +19,7 @@ router.get('/create', (req, res) => {
 
 router.post('/create', [
 	check('name', 'Name must be at least 4 character').exists().isLength({min:4}),
-	check('username', 'Username name must be at least 3 character').exists().isLength({min:3}),
+	//check('username', 'Username name must be at least 3 character').exists().isLength({min:3}),
 	check('mobile', 'mobile must be at least 4 character').exists().isLength({min:4}),
 	check('gender', 'gender must be at least 4 character').exists().isLength({min:4}),
 	check('address', 'address must be at least 5 character').exists().isLength({min:5}),
@@ -50,7 +50,7 @@ router.post('/create', [
 		if (status) {
             adminUserModel.insert(user, function (status) {
                 if (status) {
-                    res.redirect('/supAdmin_home/admin');
+                    res.redirect('/admin_home/admin');
                 } else {
                     res.render('admin/create');
                 }
@@ -82,7 +82,7 @@ router.get('/edit/:id', (req, res) => {
 
 router.post('/edit/:id', [
 	check('name', 'Name must be at least 4 character').exists().isLength({min:4}),
-	check('username', 'Username name must be at least 3 character').exists().isLength({min:3}),
+	//check('username', 'Username name must be at least 3 character').exists().isLength({min:3}),
 	check('mobile', 'mobile must be at least 4 character').exists().isLength({min:4}),
 	check('gender', 'gender must be at least 4 character').exists().isLength({min:4}),
 	check('address', 'address must be at least 5 character').exists().isLength({min:5}),
@@ -94,7 +94,7 @@ router.post('/edit/:id', [
 		console.log(errors.array());
 		const alerts = errors.array();
 		
-		res.render('supAdmin/create',{alerts})
+		res.render('admin/edit',{alerts})
 	} else {
 
 	var user = {
