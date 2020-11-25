@@ -3,7 +3,7 @@
 <%- include('../partials/salesAccounting.ejs')%>
 
 <div class="main-container">
-	<a href="/customer/create">Create New Customer</a>
+	<a href="/accountingSellsHome/customer/create">Create New Customer</a>
     <hr>
 	<h2 align=center>Customer Information</h2>
 	<br>
@@ -24,7 +24,7 @@
 			var searchBy = $("#searchBy").val();
 
 			$.ajax({
-				url: '/customer/search',
+				url: '/accountingSellsHome/customer/search',
 				method: 'post',
 				datatype : 'json',
 				data : {'search':search,
@@ -57,12 +57,12 @@
 	});
 	</script>
 	<hr>
-	<div><a class="btn btn-success" href="/accountingSellsHome/customer/csv" role="button">To CSV</a>
+	<!-- <div><a class="btn btn-success" href="/accountingSellsHome/customer/csv" role="button">To CSV</a>
 	</div>
 	<hr>
 	<div><a class="btn btn-success" href="/accountingSellsHome/pdf" role="button" id="pdf">To PDF</a>
 	</div>
-	<hr>
+	<hr> -->
 	<div class="card-box mb-30">
 		<div class="pb-20">
 		<table class="table hover data-table  nowrap" id="table" name="table">

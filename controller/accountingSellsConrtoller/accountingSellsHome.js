@@ -10,6 +10,11 @@ const customerModel = require.main.require('././models/customerModel');
 const productModel  = require.main.require('././models/productModel');
 const bankModel     = require.main.require('././models/bankModel');
 const salaryModel   = require.main.require('././models/salaryModel');
+const sellsReportModel   = require.main.require('././models/sellsReportModel');
+const pdfMake 		= require('../../assets/pdfmake/pdfmake');
+const vfsFonts 		= require('../../assets/pdfmake/vfs_fonts');
+
+pdfMake.vfs = vfsFonts.pdfMake.vfs;
 const router 	    = express.Router();
 router.get('/', (req, res)=>{
 	
@@ -64,6 +69,94 @@ router.get('/pdf', (req, res)=>{
 router.get('/report', (req, res)=>{
 	var uname = req.cookies['uname'];
 	res.render('accountingSellsHome/report', {uname}); 
+})
+router.post('/report', (req, res)=>{
+	var uname = req.cookies['uname'];
+	var productReport = req.body.productReport;
+	if(req.body.type == 1){
+		sellsReportModel.getCountProduct(function(results){
+			var type = "Total Number of Product is :"+results[0].count;
+			var documentDefinition = {
+				content:[type]
+			};
+				console.log(documentDefinition);
+				const pdfDoc = pdfMake.createPdf(documentDefinition);
+				pdfDoc.getBase64((data)=>{
+					res.writeHead(200, 
+					{
+						'Content-Type': 'application/pdf',
+						'Content-Disposition':'attachment;filename="productReport.pdf"'
+					});
+					console.log("header");
+					const download = Buffer.from(data.toString('utf-8'), 'base64');
+					res.end(download);
+				});
+				
+		});
+	}
+	else if(req.body.type == 2){
+		sellsReportModel.getCountCustomer(function(results){
+			var type = "Total Number of Customer is :"+results[0].count;
+			var documentDefinition = {
+				content:[type]
+			};
+				console.log(documentDefinition);
+				const pdfDoc = pdfMake.createPdf(documentDefinition);
+				pdfDoc.getBase64((data)=>{
+					res.writeHead(200, 
+					{
+						'Content-Type': 'application/pdf',
+						'Content-Disposition':'attachment;filename="customerReport.pdf"'
+					});
+					console.log("header");
+					const download = Buffer.from(data.toString('utf-8'), 'base64');
+					res.end(download);
+				});
+				
+		});
+	}
+	else if(req.body.type == 3){
+		sellsReportModel.getInventory(function(results){
+			var type = "Total Number of Product in inventory is :"+results[0].inventory;
+			var documentDefinition = {
+				content:[type]
+			};
+				console.log(documentDefinition);
+				const pdfDoc = pdfMake.createPdf(documentDefinition);
+				pdfDoc.getBase64((data)=>{
+					res.writeHead(200, 
+					{
+						'Content-Type': 'application/pdf',
+						'Content-Disposition':'attachment;filename="inventoryReport.pdf"'
+					});
+					console.log("header");
+					const download = Buffer.from(data.toString('utf-8'), 'base64');
+					res.end(download);
+				});
+				
+		});
+	}
+	/* sellsReportModel.getCount(function(results){
+		var type = "Total Number of Product is :"+results[0].count;
+		var documentDefinition = {
+			content:[type]
+		};
+			console.log(documentDefinition);
+			const pdfDoc = pdfMake.createPdf(documentDefinition);
+			pdfDoc.getBase64((data)=>{
+				res.writeHead(200, 
+				{
+					'Content-Type': 'application/pdf',
+					'Content-Disposition':'attachment;filename="productReport.pdf"'
+				});
+				console.log("header");
+				const download = Buffer.from(data.toString('utf-8'), 'base64');
+				res.end(download);
+			});
+			
+	});
+	 */
+	
 })
 router.get('/revenue', (req, res)=>{
 	var uname = req.cookies['uname'];

@@ -1,3 +1,52 @@
 
 <%- include('../partials/navbar.ejs')%>
 <%- include('../partials/salesAccounting.ejs')%>
+
+<div class="main-container">
+    <div class="pd-ltr-20 xs-pd-20-10">
+        <div class="min-height-200px">
+            <div class="page-header">
+                <div class="row">
+                    <div class="col-md-6 col-sm-12">
+                        <div class="title">
+                            <h4>Report</h4>
+                        </div>
+                        <nav aria-label="breadcrumb" role="navigation">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="/accountingSellsHome">Home</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Report </li>
+                            </ol>
+                        </nav>
+                    </div>
+
+                </div>
+            </div>
+            <div class="card-box mb-30">
+                <div class="pd-20">
+                    <h4 class="text-blue h4">Accounting Sells Reports</h4>
+
+                </div>
+
+                <div class="pb-20">
+                    <form action="" method="POST">
+                        <div class="form-group">
+                            <label>Package</label>
+                            <select class="form-control" name="type" id="subscription_type">
+                                <option disabled selected>Choose..</option>
+                                <option value="1">Total Product</option>
+                                <option value="2">Total Customer</option>
+                                <option value="3">Total Product in stock</option>
+                                <!-- <option value="Enterprise">Enterprise</option> -->
+                            </select>
+                        </div>
+                        <div class="pull-center">
+
+                            <input type="submit" name="sellsReport" class="btn btn-primary" value="Generate PDF"
+                                style="align-self: center;">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

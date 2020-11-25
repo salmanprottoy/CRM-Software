@@ -3,7 +3,7 @@
 <%- include('../partials/salesAccounting.ejs')%>
 
 <div class="main-container">
-    <a href="/product/create">Insert New Product</a>
+    <a href="/accountingSellsHome/product/create">Insert New Product</a>
     <hr>
 	<h2 align=center>Product Information</h2>
     <br>
@@ -28,7 +28,7 @@
 			var searchBy = $("#searchBy").val();
 
 			$.ajax({
-				url: '/product/search',
+				url: '/accountingSellsHome/product/search',
 				method: 'post',
 				datatype : 'json',
 				data : {'search':search,
